@@ -4,17 +4,20 @@ const menus = [
     {
         route: 'home',
         name: 'Ana səhifə',
-        icon: <FiHome/>
+        icon: <FiHome/>,
+        isShow: true
     },
     {
         route: 'about',
         name: 'Haqqımızda',
-        icon: <FiUser/>
+        icon: <FiUser/>,
+        isShow: true
     },
     {
         route: 'contact',
         name: 'Əlaqə',
-        icon: <FiPhone/>
+        icon: <FiPhone/>,
+        isShow: true
     }
 ];
 
