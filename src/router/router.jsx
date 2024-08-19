@@ -8,7 +8,6 @@ import AppLayout from '../layouts/AppLayout';
 import DefaultLayout from '../layouts/DefaultLayout';
 import Profile from '../pages/Profile';
 import AuthProvider from '../providers/AuthProvider';
-import { route } from '../utils/helper';
 import NotFound from '../pages/NotFound';
 
 const routers = [
