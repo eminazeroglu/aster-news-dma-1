@@ -1,0 +1,7 @@
+body {
+    @apply bg-[#F4F9F8]
+}
+
+html, body, #root {
+    @apply h-full
+}

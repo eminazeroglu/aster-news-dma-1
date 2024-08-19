@@ -1,0 +1,39 @@
+.btn {
+    @apply inline-flex px-[25px] text-[15px] items-center justify-center
+}
+
+.btn-lg {
+    @apply h-[48px]
+}
+
+.btn-md {
+    @apply h-[32px]
+}
+
+.btn-rounded {
+    @apply rounded-[4px]
+}
+
+.btn-rounded-full {
+    @apply rounded-full
+}
+
+.btn-block {
+    @apply flex w-full
+}
+
+.btn-primary {
+    @apply bg-primary text-white
+}
+
+.btn-primaryDark {
+    @apply bg-primaryDark text-white
+}
+
+.btn-primaryDarker {
+    @apply bg-primaryDarker text-white
+}
+
+.btn-outline-transparent {
+    @apply border border-gray-300 text-amberBlack
+}

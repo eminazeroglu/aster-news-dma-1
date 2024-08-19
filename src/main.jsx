@@ -1,7 +1,9 @@
 import "./assets/css/index.css"
 import { createRoot } from 'react-dom/client'
-import App from './App'
+import { RouterProvider, createHashRouter } from "react-router-dom";
+import router from "./router/router";
+
 
 createRoot(document.getElementById('root')).render(
-    <App />
+    <RouterProvider router={createHashRouter(router)} />
 )

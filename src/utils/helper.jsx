@@ -1,0 +1,40 @@
+import { generatePath } from "react-router-dom";
+import routers from "../router/router"
+
+export const objectToQueryParams = (object) => {
+    let query = '?';
+    Object.keys(object).forEach(key => {
+        query += `${key}=${object[key]}&`
+    })
+    return query.slice(0, -1) 
+}
+
+export const queryParamsToObject = (key) => {
+    const query = window.location.search?.slice(1);
+    const splitQuery = query?.split('&');
+    let object = {};
+
+    splitQuery.forEach(param => {
+        const [key, value] = param.split('=');
+        object[key] = value;
+    })
+    
+    if (key) return object[key]
+    return object;
+}
+
+export const route = (name, params = {}) => {
+    const find = routers.find(i => i.name === name);
+    objectToQueryParams(params)
+    if (find) {
+        if (Object.keys(params).length > 0) {
+            if (find.path.includes('/:')) {
+                return generatePath(find.path, params);
+            }
+            return find.path + objectToQueryParams(params);
+        }
+        return find.path
+    }
+
+    return '/'
+}
