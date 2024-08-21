@@ -1,0 +1,15 @@
+.form-element {
+    @apply h-[38px] placeholder:text-[#ADBCC4] border border-transparent bg-[#F4F9F8] outline-none px-[14px] w-full rounded-[4px]
+}
+
+.form-label {
+    @apply flex font-medium mb-2
+}
+
+.form-error {
+    @apply text-sm mt-1 text-red-500
+}
+
+.form-group-error > .form-element {
+    @apply border-red-500
+}

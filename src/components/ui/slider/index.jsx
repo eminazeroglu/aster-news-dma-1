@@ -2,8 +2,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
-import { FiArrowLeft, FiArrowRight, FiPenTool } from 'react-icons/fi';
-import { useEffect, useRef } from 'react';
+import { FiArrowLeft, FiArrowRight} from 'react-icons/fi';
+import { useRef } from 'react';
 
 function Slider({ items = [], title, titleIcon, children }) {
 

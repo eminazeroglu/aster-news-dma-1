@@ -1,12 +1,28 @@
-import { FiLogOut, FiUser } from "react-icons/fi";
+import { FiCrosshair, FiFeather, FiFileText, FiLogOut, FiUser } from "react-icons/fi";
 import Dropdown from "../ui/dropdown";
 import { Link } from "react-router-dom";
 import { route } from "../../utils/helper";
 import Button from "../ui/button";
+import Card from "../ui/card";
+import { GoSun } from "react-icons/go";
+import CardSlider from "../ui/card-slider";
+import Scrollbar from "../ui/scrollbar";
+import FormGroup from "../ui/form/FormGroup";
+import FormInput from "../ui/form/FormInput";
+import { useModalContext } from "../../contexts/ModalContext";
 
 function RightBlock() {
 
+    const {handleModal } = useModalContext();
     const token = localStorage.getItem('token');
+
+    const texts = [
+        '1. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quia soluta neque iure voluptate distinctio aliquid quae labore optio pariatur harum sapiente officiis, sit ad minima laudantium velit perspiciatis debitis.',
+        '2. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quia soluta neque iure voluptate distinctio aliquid quae labore optio pariatur harum sapiente officiis, sit ad minima laudantium velit perspiciatis debitis.',
+        '3. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quia soluta neque iure voluptate distinctio aliquid quae labore optio pariatur harum sapiente officiis, sit ad minima laudantium velit perspiciatis debitis.',
+        '4. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quia soluta neque iure voluptate distinctio aliquid quae labore optio pariatur harum sapiente officiis, sit ad minima laudantium velit perspiciatis debitis.',
+        '5. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quia soluta neque iure voluptate distinctio aliquid quae labore optio pariatur harum sapiente officiis, sit ad minima laudantium velit perspiciatis debitis.',
+    ]
 
     const dropdownMenus = [
         { route: 'profile', name: 'Profilim', icon: <FiUser /> },
@@ -21,49 +37,111 @@ function RightBlock() {
     }
 
     const handleLogin = () => {
-        localStorage.setItem('token', 'test');
-        window.location.reload()
+        handleModal('login', true, { fullname: 'Test' })
     }
 
     return (
         <div>
             <aside className="fixed w-[285px] py-[15px]">
-                <div className="h-[46px] items-center w-[190px] flex justify-end">
-                    {token && (
-                        <Dropdown
-                            btnRender={
-                                <div className="flex items-center gap-x-2">
-                                    <figure className="size-[30px] rounded-full overflow-hidden">
-                                        <img className="size-full object-cover" src="https://s3-alpha-sig.figma.com/img/ac1e/f74c/931ce67584033f45f9412bcba54ac5f3?Expires=1725235200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=qPdymf7qCzCHPsdvzVXGi-tSFjkTYCI9rJFn3to-Zqs3T~4cEDSGl41YVwQJxh2fYApbvHktrb-aqu4EcZC2T-~EuFVjvAxgnq8ZvC6HX~gLgCK1hv4gpnu5YqQ0Kee33okpfVOlkMTwMdsXkLWlc-ZQdi9VwafimxLRtyu8jCBKlup5NK1hXSVM6lrhxOlmJBHciH2CfwhlUO9JRevu5uPSKsy94V6NLNWemsuvIM3zVj9VHqdbUkxKxsPmDigEShWqI3zC58vIu9A1Lpt2Tuwv~yJRlLwGm~M4YnIDm5eDOeCuc3CwIjjir17sxKtNTSR6ooKbO7xa4dDrbFHlLw__" alt="" />
-                                    </figure>
-                                    <span>Joe Doe</span>
-                                </div>
-                            }
+                <div className="flex justify-end">
+                    <div className="h-[46px] mb-[15px] items-center w-[190px] flex justify-end">
+                        {token && (
+                            <Dropdown
+                                btnRender={
+                                    <div className="flex items-center gap-x-2">
+                                        <figure className="size-[30px] rounded-full overflow-hidden">
+                                            <img className="size-full object-cover" src="https://s3-alpha-sig.figma.com/img/ac1e/f74c/931ce67584033f45f9412bcba54ac5f3?Expires=1725235200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=qPdymf7qCzCHPsdvzVXGi-tSFjkTYCI9rJFn3to-Zqs3T~4cEDSGl41YVwQJxh2fYApbvHktrb-aqu4EcZC2T-~EuFVjvAxgnq8ZvC6HX~gLgCK1hv4gpnu5YqQ0Kee33okpfVOlkMTwMdsXkLWlc-ZQdi9VwafimxLRtyu8jCBKlup5NK1hXSVM6lrhxOlmJBHciH2CfwhlUO9JRevu5uPSKsy94V6NLNWemsuvIM3zVj9VHqdbUkxKxsPmDigEShWqI3zC58vIu9A1Lpt2Tuwv~yJRlLwGm~M4YnIDm5eDOeCuc3CwIjjir17sxKtNTSR6ooKbO7xa4dDrbFHlLw__" alt="" />
+                                        </figure>
+                                        <span>Joe Doe</span>
+                                    </div>
+                                }
+                            >
+                                {dropdownMenus.map((menu, index) => (
+                                    <Link
+                                        key={index}
+                                        to={menu.route ? route(menu.route) : false}
+                                        onClick={menu.key ? () => handeClick(menu.key) : false}
+                                        className="flex items-center h-[40px] gap-x-2"
+                                    >
+                                        <span className="inline-flex size-[24px] text-[18px] items-center">{menu.icon}</span>
+                                        <span>{menu.name}</span>
+                                    </Link>
+                                ))}
+                            </Dropdown>
+                        )}
+
+                        {!token && (
+                            <Button rounded={true} onClick={() => handleLogin()}>
+                                Daxil ol
+                            </Button>
+                        )}
+                    </div>
+                </div>
+
+                <Scrollbar className="h-[calc(100vh_-_85px)]">
+                    <div className="space-y-[15px]">
+                        <Card
+                            title="Coimbatore, Tamil Nadu"
+                            rightRender={<FiCrosshair className="text-[18px]" />}
                         >
-                            {dropdownMenus.map((menu, index) => (
-                                <Link
-                                    key={index}
-                                    to={menu.route ? route(menu.route) : false}
-                                    onClick={menu.key ? () => handeClick(menu.key) : false}
-                                    className="flex items-center h-[40px] gap-x-2"
-                                >
-                                    <span className="inline-flex size-[24px] text-[18px] items-center">{menu.icon}</span>
-                                    <span>{menu.name}</span>
-                                </Link>
-                            ))}
-                        </Dropdown>
-                    )}
+                            <div className="flex justify-between">
+                                <div>
+                                    <p className="text-[15px]">Sunny</p>
+                                    <p className="text-[26px] font-bold">31<sup>o</sup> c</p>
+                                </div>
+                                <div className="text-[52px] size-[52px] inline-flex items-center justify-center text-[#FFCF26]">
+                                    <GoSun />
+                                </div>
+                            </div>
+                            <div className="text-[12px] mt-[15px] space-x-[23px]">
+                                <span>Celsius</span>
+                                <span className="opacity-30">Fahrenheit</span>
+                            </div>
+                        </Card>
 
-                    {!token && (
-                        <Button rounded={true} onClick={() => handleLogin()}>
-                            Daxil ol
-                        </Button>
-                    )}
-                </div>
+                        <Card
+                            title="Become a Story Writer"
+                            titleIcon={<FiFeather />}
+                        >
+                            <div className="flex gap-x-[25px] items-center">
+                                <div className="text-[12px] leading-[18px] text-[#6A8193]">
+                                    Contribute stories and start earning.
+                                </div>
+                                <div>
+                                    <Button size="lg" rounded={true} property="primary-outline">
+                                        Know More
+                                    </Button>
+                                </div>
+                            </div>
+                        </Card>
 
-                <div>
-                    asdsa
-                </div>
+                        <CardSlider
+                            title="Quick Bytes"
+                            titleIcon={<FiFileText />}
+                            items={texts}
+                        >
+                            {(text) => <p className="text-[#6A8193] text-[12px]">{text}</p>}
+                        </CardSlider>
+
+                        <Card
+                            title="Subscribe to our newsletter"
+                        >
+                            <div>
+                                <FormGroup>
+                                    <FormInput
+                                        placeholder="Enter Email"
+                                    />
+                                </FormGroup>
+                            </div>
+                            <div className="mt-[16px]">
+                                <Button block={true} rounded={true}>
+                                    Subscribe
+                                </Button>
+                            </div>
+                        </Card>
+                    </div>
+                </Scrollbar>
+
             </aside>
         </div>
     );

@@ -1,4 +1,3 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom'
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import View from "@/pages/View";
@@ -9,6 +8,8 @@ import DefaultLayout from '../layouts/DefaultLayout';
 import Profile from '../pages/Profile';
 import AuthProvider from '../providers/AuthProvider';
 import NotFound from '../pages/NotFound';
+import ModalProvider from "../providers/ModalProvider";
+import { ModalContextProvider } from "../contexts/ModalContext";
 
 const routers = [
     {
@@ -51,12 +52,12 @@ const routers = [
     {
         path: '*',
         layout: 'app',
-        element: <NotFound/>
+        element: <NotFound />
     }
 ];
 
 const routerMap = (routers) => routers.map(router => {
-    
+
     if (router.layout) {
         if (router.layout === 'app') {
             router.element = <AppLayout>{router.element}</AppLayout>
@@ -69,6 +70,12 @@ const routerMap = (routers) => routers.map(router => {
     if (router.auth) {
         router.element = <AuthProvider>{router.element}</AuthProvider>
     }
+
+    router.element = (
+        <ModalContextProvider>
+            <ModalProvider>{router.element}</ModalProvider>
+        </ModalContextProvider>
+    )
 
     return router;
 })

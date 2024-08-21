@@ -1,0 +1,14 @@
+.card-slider {
+    @apply relative
+}
+
+.card-slider-bullet-content {
+    @apply flex items-center gap-x-[8px] justify-center pt-[10px]
+}
+.card-slider-bullet-content .card-slider-bullet {
+    @apply size-[6px] inline-flex bg-[#B5C0C9] rounded-full cursor-pointer
+}
+
+.card-slider-bullet-content .card-slider-bullet-active {
+    @apply size-[8px] bg-primary
+}

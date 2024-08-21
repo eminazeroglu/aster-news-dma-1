@@ -6,7 +6,7 @@ export const objectToQueryParams = (object) => {
     Object.keys(object).forEach(key => {
         query += `${key}=${object[key]}&`
     })
-    return query.slice(0, -1) 
+    return query.slice(0, -1)
 }
 
 export const queryParamsToObject = (key) => {
@@ -18,7 +18,7 @@ export const queryParamsToObject = (key) => {
         const [key, value] = param.split('=');
         object[key] = value;
     })
-    
+
     if (key) return object[key]
     return object;
 }
@@ -37,4 +37,22 @@ export const route = (name, params = {}) => {
     }
 
     return '/'
+}
+
+export const dynamicImport = async () => {
+    const modules = {};
+    const moduleFiles = import.meta.glob('../modals/*.jsx');
+
+    for (let path in moduleFiles) {
+        try {
+            const fileName = path.split('/').pop().replace('.jsx', '')
+            const module = await moduleFiles[path]();
+            modules[fileName] = module.default || module;
+        }
+        catch (e) {
+            console.error(`Error importing ${moduleName}:`, error);
+        }
+    }
+
+    return modules;
 }
