@@ -1,5 +1,9 @@
 .btn {
-    @apply whitespace-nowrap inline-flex px-[25px] text-[15px] items-center justify-center
+    @apply gap-x-1 whitespace-nowrap inline-flex px-[25px] text-[15px] items-center justify-center
+}
+
+.btn svg {
+    @apply !size-[18px]
 }
 
 .btn-lg {

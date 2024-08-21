@@ -1,10 +1,14 @@
 import classNames from "classnames";
+import { useStoreApp } from "../../../stores/module/app.store";
 
 function FormGroup({ label, required = false, children, error = false }) {
+    
+    const {errors} = useStoreApp();
+    
     return (
         <div className={classNames({
             'form-group': true,
-            'form-group-error': error
+            'form-group-error': errors[error]
         })}>
             {label && (
                 <label className="form-label">
@@ -12,7 +16,7 @@ function FormGroup({ label, required = false, children, error = false }) {
                 </label>
             )}
             {children}
-            {error && <p className="form-error">{error}</p>}
+            {errors[error] && <p className="form-error">{errors[error]}</p>}
         </div>
     );
 }

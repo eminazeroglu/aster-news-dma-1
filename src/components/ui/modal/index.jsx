@@ -12,7 +12,7 @@ function Modal({title, children, backdrop = false, className, open = false, onCl
     
     return (
         <div className={classNames({
-            'fixed flex items-center transition-all justify-center inset-0 z-[999] bg-gray-900/60': true,
+            'fixed flex items-center overflow-y-auto py-10 transition-all justify-center inset-0 z-[999] bg-gray-900/60': true,
             'opacity-0 invisible': !open
         })}>
             <div ref={ref} className={classNames([
