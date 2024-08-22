@@ -1,5 +1,6 @@
 import { generatePath } from "react-router-dom";
 import routers from "../router/router"
+import { toast } from 'react-toastify';
 
 export const objectToQueryParams = (object) => {
     let query = '?';
@@ -10,10 +11,10 @@ export const objectToQueryParams = (object) => {
 }
 
 export const queryParamsToObject = (key) => {
-    const query = window.location.search?.slice(1);
+    const query = window.location.hash?.split('?').pop();
     const splitQuery = query?.split('&');
     let object = {};
-
+    
     splitQuery.forEach(param => {
         const [key, value] = param.split('=');
         object[key] = value;
@@ -55,4 +56,8 @@ export const dynamicImport = async () => {
     }
 
     return modules;
+}
+
+export const notification = (message, type = 'success') => {
+    toast[type](message)
 }

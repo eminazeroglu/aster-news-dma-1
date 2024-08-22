@@ -1,5 +1,6 @@
 import axios from "axios";
 import { serviceStoreSetErrors } from "../services/store.service";
+import { notification } from "./helper";
 
 const service = () => {
     const headers = {
@@ -27,6 +28,9 @@ const service = () => {
 
         if (error.status === 422) {
             serviceStoreSetErrors(error.data)
+        }
+        else if (error.status === 404) {
+            notification('Axtardığınız məlumat tapılmadı', 'error')
         }
 
 

@@ -10,6 +10,7 @@ import AuthProvider from '../providers/AuthProvider';
 import NotFound from '../pages/NotFound';
 import ModalProvider from "../providers/ModalProvider";
 import { ModalContextProvider } from "../contexts/ModalContext";
+import Author from "../pages/Author";
 
 const routers = [
     {
@@ -40,6 +41,12 @@ const routers = [
         path: "/contact",
         name: 'contact',
         element: <Contact />,
+        layout: 'app'
+    },
+    {
+        path: "/author/:slug",
+        name: 'author',
+        element: <Author />,
         layout: 'app'
     },
     {

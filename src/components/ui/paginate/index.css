@@ -1,0 +1,15 @@
+.pagination-container {
+    @apply flex items-center mt-10 gap-x-2
+}
+
+.pagination-item {
+    @apply h-[35px] px-3 border border-gray-200 rounded cursor-pointer disabled:opacity-20 flex items-center justify-center bg-white
+}
+
+.pagination-item.disabled {
+    @apply !opacity-40 cursor-default
+}
+
+.pagination-item.selected {
+    @apply bg-primary text-white
+}

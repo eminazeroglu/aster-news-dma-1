@@ -5,38 +5,36 @@ import Slider from "../components/ui/slider";
 import Button from "../components/ui/button";
 import { API } from "../utils/api";
 import { useEffect } from "react";
-import { useFetchNewsAll } from "../hooks/useFetch";
-import Loading from "../components/ui/loading";
+import { useFetchNewsAll, useFetchRandomAuthor } from "../hooks/useFetch";
+import SkeletonContent from "../components/ui/skeleton-content";
+import Section from "../components/ui/section";
 
 function Home() {
 
+    const newsLimit = 6;
     const [newsItems, fetchNewsItems, newsLoading] = useFetchNewsAll();
-
-    const users = [1, 2, 3, 4, 5, 6, 7, 8]
-
-    const fetchList = async () => {
-        const res = await API.get('/authors?limit=12&type=news&random=true');
-    }
-
-
+    const [authors, fetchAuthors, authorLoading] = useFetchRandomAuthor();
 
     useEffect(() => {
-        fetchNewsItems({ limit: 6 });
+        fetchNewsItems({ limit: newsLimit });
+        fetchAuthors(10)
     }, [])
 
     return (
         <>
-            <Loading loading={newsLoading}>
+            <Section title="Ən çox oxunanlar">
                 <div className="grid grid-cols-2 gap-[20px]">
-                    {newsItems.map((item, index) => (
-                        <NewsItem key={index} item={item} />
-                    ))}
+                    <SkeletonContent loading={newsLoading} type="news" count={newsLimit}>
+                        {newsItems.map((item, index) => (
+                            <NewsItem key={index} item={item} />
+                        ))}
+                    </SkeletonContent>
                 </div>
-            </Loading>
+            </Section>
 
             <div className="mt-10">
                 <Slider
-                    items={users}
+                    items={authors}
                     title="Creators you should follow"
                     titleIcon={<FiFeather />}
                 >

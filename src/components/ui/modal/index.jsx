@@ -1,5 +1,6 @@
 import { useClickAway } from "@uidotdev/usehooks";
 import classNames from "classnames";
+import { createPortal } from "react-dom";
 import { FiX } from "react-icons/fi";
 
 function Modal({title, children, backdrop = false, className, open = false, onClose}) {
@@ -9,8 +10,8 @@ function Modal({title, children, backdrop = false, className, open = false, onCl
             onClose()
         }
     })
-    
-    return (
+
+    const modalContent = (
         <div className={classNames({
             'fixed flex items-center overflow-y-auto py-10 transition-all justify-center inset-0 z-[999] bg-gray-900/60': true,
             'opacity-0 invisible': !open
@@ -38,7 +39,9 @@ function Modal({title, children, backdrop = false, className, open = false, onCl
                 </div>
             </div>
         </div>
-    );
+    )
+    
+    return open ? createPortal(modalContent, document.body) : false;
 }
 
 export default Modal;

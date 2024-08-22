@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import LoadingIcon from "../loading-icon";
+import { useNavigate } from "react-router-dom";
 
 function Button(
     {
@@ -7,6 +8,7 @@ function Button(
         type = "button",
         onClick = () => { },
         size = 'md',
+        to,
         block = false,
         className,
         property = 'primary',
@@ -15,10 +17,22 @@ function Button(
         loading = false,
     }
 ) {
+
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        if (to) {
+            navigate(to)
+        }
+        else {
+            onClick();
+        }
+    }
+    
     return (
         <button
             type={type}
-            onClick={() => onClick()}
+            onClick={() => handleClick()}
             className={classNames(
                 {
                     'btn': true,
