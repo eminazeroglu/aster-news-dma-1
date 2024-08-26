@@ -1,3 +1,4 @@
+import NavbarNavlink from "../../common/components/NavbarNavlink";
 import NewsItem from "../news-item";
 
 function SkeletonContent({ loading = false, children, count, type }) {
@@ -11,6 +12,7 @@ function SkeletonContent({ loading = false, children, count, type }) {
             {array.map((index) => (
                 <div key={index}>
                     {type === 'news' && <NewsItem skeleton={true} />}
+                    {type === 'category' && <NavbarNavlink skeleton={true}/>}
                 </div>
             ))}
         </>

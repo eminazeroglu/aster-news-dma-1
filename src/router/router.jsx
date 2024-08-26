@@ -1,16 +1,17 @@
-import Home from "@/pages/Home";
-import About from "@/pages/About";
-import View from "@/pages/View";
-import Contact from "@/pages/Contact";
-import Search from "@/pages/Search";
-import AppLayout from '../layouts/AppLayout';
-import DefaultLayout from '../layouts/DefaultLayout';
-import Profile from '../pages/Profile';
-import AuthProvider from '../providers/AuthProvider';
-import NotFound from '../pages/NotFound';
-import ModalProvider from "../providers/ModalProvider";
-import { ModalContextProvider } from "../contexts/ModalContext";
-import Author from "../pages/Author";
+import Home from "pages/Home.jsx";
+import About from "pages/About.jsx";
+import View from "pages/View.jsx";
+import Search from "pages/Search.jsx";
+import Contact from "pages/Contact.jsx";
+import Author from "pages/Author.jsx";
+import Profile from "pages/Profile.jsx";
+import NotFound from "pages/NotFound.jsx";
+import AppLayout from "layouts/AppLayout.jsx";
+import DefaultLayout from "layouts/DefaultLayout.jsx";
+import AuthProvider from "providers/AuthProvider.jsx";
+import {ModalContextProvider} from "contexts/ModalContext.jsx";
+import ModalProvider from "providers/ModalProvider.jsx";
+
 
 const routers = [
     {

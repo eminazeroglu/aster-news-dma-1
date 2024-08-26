@@ -25,20 +25,21 @@ const Paginate = (props) => {
     }
 
     const onNext = () => {
-        console.log(currentPage);
-
         onPageChange(currentPage + 1);
+        window.scrollTo(0, 0)
     };
+
+    const handlePageClick = (pageNumber) => {
+        window.scrollTo(0, 0)
+        onPageChange(pageNumber)
+    }
 
     const onPrevious = () => {
         onPageChange(currentPage - 1);
+        window.scrollTo(0, 0)
     };
 
     let lastPage = paginationRange[paginationRange.length - 1];
-
-    console.log(lastPage);
-
-
 
     return (
         <div className="flex items-center justify-center">
@@ -57,7 +58,7 @@ const Paginate = (props) => {
                 </li>
                 {paginationRange.map((pageNumber, index) => {
                     if (pageNumber === DOTS) {
-                        return <li className="pagination-item dots">&#8230;</li>;
+                        return <li key={index} className="pagination-item dots">&#8230;</li>;
                     }
 
                     return (
@@ -66,7 +67,7 @@ const Paginate = (props) => {
                             className={classNames("pagination-item", {
                                 selected: pageNumber === currentPage
                             })}
-                            onClick={() => onPageChange(pageNumber)}
+                            onClick={() => handlePageClick(pageNumber)}
                         >
                             {pageNumber}
                         </li>

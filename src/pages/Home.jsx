@@ -3,17 +3,40 @@ import AuthorItem from "../components/ui/author-item";
 import NewsItem from "../components/ui/news-item";
 import Slider from "../components/ui/slider";
 import Button from "../components/ui/button";
-import { API } from "../utils/api";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFetchNewsAll, useFetchRandomAuthor } from "../hooks/useFetch";
 import SkeletonContent from "../components/ui/skeleton-content";
 import Section from "../components/ui/section";
 
 function Home() {
 
+    const [page, setPage] = useState(1);
+    const [allNewsData, setAllNewsData] = useState([]); 
     const newsLimit = 6;
-    const [newsItems, fetchNewsItems, newsLoading] = useFetchNewsAll();
+    const allNewsLimit = 10;
+    const [{data: newsItems = []}, fetchNewsItems, newsLoading] = useFetchNewsAll();
+    const [{data: allNewsItems = []}, fetchAllNewsItems, allNewsLoading] = useFetchNewsAll();
     const [authors, fetchAuthors, authorLoading] = useFetchRandomAuthor();
+
+    const fetchAllNews = () => {
+        fetchAllNewsItems({
+            limit: allNewsLimit,
+            page
+        });
+    }
+
+    const handlePage = () => {
+        setPage(p => p+1)
+    }
+
+    useEffect(() => {
+        fetchAllNews()
+    }, [page])
+
+    useEffect(() => {
+        const items = [...allNewsData, ...allNewsItems]
+        setAllNewsData(items)
+    }, [allNewsItems])
 
     useEffect(() => {
         fetchNewsItems({ limit: newsLimit });
@@ -44,14 +67,15 @@ function Home() {
 
             <div className="mt-[44px]">
                 <div className="grid grid-cols-2 gap-[20px]">
-                    <NewsItem />
-                    <NewsItem />
-                    <NewsItem />
-                    <NewsItem />
+                    <SkeletonContent loading={allNewsLoading} type="news" count={allNewsLimit}>
+                        {allNewsData.map((item, index) => (
+                            <NewsItem key={index} item={item} />
+                        ))}
+                    </SkeletonContent>
                 </div>
                 <div className="mt-[44px] flex justify-center">
-                    <Button size="lg" rounded={true} property="outline-transparent">
-                        Show More
+                    <Button loading={allNewsLoading} onClick={() => handlePage()} size="lg" rounded={true} property="outline-transparent">
+                        Daha çox
                     </Button>
                 </div>
             </div>

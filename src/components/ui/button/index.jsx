@@ -15,6 +15,7 @@ function Button(
         rounded = false,
         roundedFull = false,
         loading = false,
+        disabled = false,
     }
 ) {
 
@@ -31,6 +32,7 @@ function Button(
     
     return (
         <button
+            disabled={disabled}
             type={type}
             onClick={() => handleClick()}
             className={classNames(

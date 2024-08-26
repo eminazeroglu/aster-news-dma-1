@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import SubscriptionBox from "../ui/subscription";
 import Navbar from "./Navbar";
 import { route } from "../../utils/helper";
+import Scrollbar from "../ui/scrollbar";
 
 function LeftBlock() {
     return (
@@ -13,11 +14,16 @@ function LeftBlock() {
                         <span className="text-primaryDark text-[18px] font-bold">Aster News</span>
                     </Link>
                 </div>
-                <Navbar />
 
-                <div className="px-[17px]">
-                    <SubscriptionBox />
-                </div>
+                <Scrollbar className="h-[calc(100vh_-_75px)]">
+                    <div className="pb-10">
+                        <Navbar />
+
+                        <div className="px-[17px]">
+                            <SubscriptionBox />
+                        </div>
+                    </div>
+                </Scrollbar>
             </aside>
         </div>
     );

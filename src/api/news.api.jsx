@@ -3,6 +3,7 @@ const NewsApi = {
     byId: '/news/show/:id',
     bySlug: '/news/slug/:slug',
     categories: '/news/category',
+    categoryBySlug: '/news/category/:slug',
     random: '/news/random',
     comments: '/news/:id/comments',
     commentPost: '/news/:id/comment',

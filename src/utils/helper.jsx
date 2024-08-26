@@ -10,20 +10,6 @@ export const objectToQueryParams = (object) => {
     return query.slice(0, -1)
 }
 
-export const queryParamsToObject = (key) => {
-    const query = window.location.hash?.split('?').pop();
-    const splitQuery = query?.split('&');
-    let object = {};
-    
-    splitQuery.forEach(param => {
-        const [key, value] = param.split('=');
-        object[key] = value;
-    })
-
-    if (key) return object[key]
-    return object;
-}
-
 export const route = (name, params = {}) => {
     const find = routers.find(i => i.name === name);
     objectToQueryParams(params)

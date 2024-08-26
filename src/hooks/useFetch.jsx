@@ -15,6 +15,7 @@ export const useFetch = (initialState = false) => {
             setLoading(false)
         }
         catch(e) {
+            setData(initialState)
             setLoading(false)
         }
     }
@@ -31,7 +32,7 @@ export const useFetchNewsAll = () => {
     const [data, fetchData, loading] = useFetch([]);
 
     const fetch = (params = {}) => {
-        fetchData(NewsApi.all, params)
+        fetchData(NewsApi.all, params, false)
     }
 
     return [data, fetch, loading]
@@ -57,6 +58,26 @@ export const useFetchAuthorBySlug = () => {
     return [data, fetch, loading]
 }
 
+export const useFetchNewsBySlug = () => {
+    const [data, fetchData, loading] = useFetch();
+
+    const fetch = (slug) => {
+        fetchData(NewsApi.bySlug.replace(':slug', slug), {}, false)
+    }
+
+    return [data, fetch, loading]
+}
+
+export const useFetchNewsCommentById = () => {
+    const [data, fetchData, loading] = useFetch([]);
+
+    const fetch = (id) => {
+        fetchData(NewsApi.comments.replace(':id', id), {}, false)
+    }
+
+    return [data.sort((a, b) => b.id - a.id), fetch, loading]
+}
+
 export const useFetchNewsByAuthor = () => {
     const [data, fetchData, loading] = useFetch();
 
@@ -72,6 +93,16 @@ export const useFetchCategories = () => {
 
     const fetch = () => {
         fetchData(NewsApi.categories, {}, false)
+    }
+
+    return [data, fetch, loading]
+}
+
+export const useFetchCategoryBySlug = () => {
+    const [data, fetchData, loading] = useFetch();
+
+    const fetch = (slug) => {
+        fetchData(NewsApi.categoryBySlug.replace(':slug', slug), {}, false)
     }
 
     return [data, fetch, loading]
