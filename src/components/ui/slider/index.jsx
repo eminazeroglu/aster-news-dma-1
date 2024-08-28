@@ -4,9 +4,11 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import { FiArrowLeft, FiArrowRight} from 'react-icons/fi';
 import { useRef } from 'react';
+import useDeviceType from "hooks/useDevice.jsx";
 
 function Slider({ items = [], title, titleIcon, children }) {
 
+    const {isMobile} = useDeviceType();
     const btnLeft = useRef(null)
     const btnRight = useRef(null)
 
@@ -36,7 +38,7 @@ function Slider({ items = [], title, titleIcon, children }) {
                         nextEl: btnRight.current,
                     }}
                     modules={[Navigation]}
-                    slidesPerView={5}
+                    slidesPerView={isMobile ? 2 : 5}
                     spaceBetween={15}
                     onBeforeInit={(swiper) => {
                         swiper.params.navigation.prevEl = btnLeft.current;

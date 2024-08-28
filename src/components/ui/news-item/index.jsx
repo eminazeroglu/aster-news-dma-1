@@ -1,12 +1,12 @@
 import { FiPocket, FiShare } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { route } from "../../../utils/helper";
+import { route } from "utils/helper.jsx";
 import moment from "moment";
 import Skeleton from "../skeleton";
 
 function NewsItem({ item = {}, skeleton = false }) {
     return (
-        <article className="p-[17px] relative rounded-[4px] bg-white shadow-[0px_2px_20px_0px_#0000000A]">
+        <article className="p-[17px] relative rounded-[4px] dark:bg-gray-800 bg-white shadow-[0px_2px_20px_0px_#0000000A]">
             <Link to={route('view', { slug: item?.slug || 'test' })} className="absolute inset-0 z-10" />
             <div className="flex gap-x-[17px]">
                 <div className="flex-1">
@@ -54,7 +54,7 @@ function NewsItem({ item = {}, skeleton = false }) {
                     {skeleton ? (
                         <Skeleton className="h-[15px] w-[50px]" />
                     ) : (
-                        <button className="text-[12px] inline-flex items-center gap-x-[8px] text-[#0768B5]">
+                        <button className="text-[12px] inline-flex items-center gap-x-[8px] dark:text-blue-300 text-[#0768B5]">
                             <span>
                                 <FiShare />
                             </span>
@@ -64,7 +64,7 @@ function NewsItem({ item = {}, skeleton = false }) {
                     {skeleton ? (
                         <Skeleton className="h-[15px] w-[50px]" />
                     ) : (
-                        <button className="text-[12px] inline-flex items-center gap-x-[8px] text-[#0768B5]">
+                        <button className="text-[12px] inline-flex items-center gap-x-[8px] dark:text-blue-300 text-[#0768B5]">
                             <span>
                                 <FiPocket />
                             </span>

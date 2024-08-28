@@ -30,15 +30,15 @@ const IconTemplate = ({ slug }) => {
 function NavbarNavlink({ menu = {}, isActive = false, skeleton = false }) {
     return (
         <Link to={route('search', { category: menu.slug })} className={classNames({
-            'pl-[33px] flex gap-x-[22px] h-[50px] items-center text-amberBlack': true,
-            'font-bold !text-primary bg-[#E0F0F8] rounded-r-full': isActive
+            'lg:pl-[33px] pl-[10px] flex gap-x-[22px] h-[50px] items-center text-amberBlack dark:text-gray-300': true,
+            'font-bold !text-primary bg-[#E0F0F8] dark:bg-gray-700 dark:!text-white rounded-r-full': isActive
         })}>
             <span className="text-[24px] w-[24px] inline-flex h-[24px] justify-center items-center">
                 {skeleton ? (
                     <Skeleton className="size-[24px]" />
                 ) : <IconTemplate slug={menu.slug} />}
             </span>
-            <span className="text-[15px] flex-1">
+            <span className="text-[18px] md:text-[15px] flex-1">
                 { skeleton ? <Skeleton className="h-[15px] w-full"/> : menu.name }
             </span>
         </Link>

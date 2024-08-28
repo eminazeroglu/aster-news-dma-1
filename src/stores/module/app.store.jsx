@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const initialState = {
     errors: {},
-    darkMode: false,
+    darkMode: localStorage.getItem('darkMode') ? localStorage.getItem('darkMode') === 'true' : window.matchMedia("(prefers-color-scheme: dark)").matches,
 }
 
 const appStore = createSlice({
@@ -15,6 +15,7 @@ const appStore = createSlice({
         },
         setDarkMode (state, action) {
             state.darkMode = action.payload;
+            localStorage.setItem('darkMode', state.darkMode)
         }
     }
 })

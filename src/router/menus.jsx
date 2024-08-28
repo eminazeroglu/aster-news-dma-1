@@ -1,4 +1,4 @@
-import { FiHome, FiPhone, FiUser } from "react-icons/fi";
+import {FiHome, FiLogOut, FiPhone, FiUser} from "react-icons/fi";
 
 const menus = [
     {
@@ -22,3 +22,8 @@ const menus = [
 ];
 
 export default menus;
+
+export const profileMenus = [
+    { route: 'profile', name: 'Profilim', icon: <FiUser /> },
+    { key: 'logout', name: 'Logout', icon: <FiLogOut /> },
+]

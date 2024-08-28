@@ -30,7 +30,7 @@ function CommentBox({items = [], onSubmit, onDelete, btnLoading = false}) {
                     <form onSubmit={handleSubmit}>
                         <div>
                             <textarea value={text} onChange={e => setText(e.target.value)}
-                                      className="form-element !bg-[#ECF5F8] !py-3" cols="30" rows="4"></textarea>
+                                      className="form-element dark:!bg-gray-800 dark:border-gray-700 !bg-[#ECF5F8] !py-3" cols="30" rows="4"></textarea>
                         </div>
                         <div className="mt-[11px]">
                             <Button loading={btnLoading} disabled={!text.trim()} type="submit" rounded={true}>

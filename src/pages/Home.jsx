@@ -46,7 +46,7 @@ function Home() {
     return (
         <>
             <Section title="Ən çox oxunanlar">
-                <div className="grid grid-cols-2 gap-[20px]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
                     <SkeletonContent loading={newsLoading} type="news" count={newsLimit}>
                         {newsItems.map((item, index) => (
                             <NewsItem key={index} item={item} />
@@ -66,7 +66,7 @@ function Home() {
             </div>
 
             <div className="mt-[44px]">
-                <div className="grid grid-cols-2 gap-[20px]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
                     <SkeletonContent loading={allNewsLoading} type="news" count={allNewsLimit}>
                         {allNewsData.map((item, index) => (
                             <NewsItem key={index} item={item} />

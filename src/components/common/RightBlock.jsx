@@ -1,28 +1,24 @@
-import { FiCrosshair, FiFeather, FiFileText, FiLogOut, FiUser } from "react-icons/fi";
+import {FiFeather, FiFileText, FiLogOut, FiUser} from "react-icons/fi";
 import Dropdown from "../ui/dropdown";
-import { Link } from "react-router-dom";
-import { route } from "../../utils/helper";
+import {Link} from "react-router-dom";
+import {route} from "utils/helper.jsx";
 import Button from "../ui/button";
 import Card from "../ui/card";
-import { GoSun } from "react-icons/go";
 import CardSlider from "../ui/card-slider";
 import Scrollbar from "../ui/scrollbar";
 import FormGroup from "../ui/form/FormGroup";
 import FormInput from "../ui/form/FormInput";
-import { useModalContext } from "contexts/ModalContext.jsx";
-import { useStoreAuth } from "stores/module/auth.store.jsx";
-import { useGeolocation } from "@uidotdev/usehooks";
-import {useFetchOpenWeatherMap} from "hooks/useFetch.jsx";
-import {useEffect} from "react";
+import {useModalContext} from "contexts/ModalContext.jsx";
+import {useStoreAuth} from "stores/module/auth.store.jsx";
+import Weather from "components/ui/weather/index.jsx";
+import ThemeMode from "components/ui/theme-mode/index.jsx";
+import classNames from "classnames";
+import {profileMenus} from "router/menus.jsx";
 
 function RightBlock() {
 
     const {handleModal } = useModalContext();
     const {token, user} = useStoreAuth();
-    const state = useGeolocation();
-    const [weather, fetchWeather] = useFetchOpenWeatherMap();
-
-    console.log(state);
 
     const texts = [
         '1. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quia soluta neque iure voluptate distinctio aliquid quae labore optio pariatur harum sapiente officiis, sit ad minima laudantium velit perspiciatis debitis.',
@@ -30,11 +26,6 @@ function RightBlock() {
         '3. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quia soluta neque iure voluptate distinctio aliquid quae labore optio pariatur harum sapiente officiis, sit ad minima laudantium velit perspiciatis debitis.',
         '4. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quia soluta neque iure voluptate distinctio aliquid quae labore optio pariatur harum sapiente officiis, sit ad minima laudantium velit perspiciatis debitis.',
         '5. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quia soluta neque iure voluptate distinctio aliquid quae labore optio pariatur harum sapiente officiis, sit ad minima laudantium velit perspiciatis debitis.',
-    ]
-
-    const dropdownMenus = [
-        { route: 'profile', name: 'Profilim', icon: <FiUser /> },
-        { key: 'logout', name: 'Logout', icon: <FiLogOut /> },
     ]
 
     const handeClick = (key) => {
@@ -48,20 +39,17 @@ function RightBlock() {
         handleModal('login', true, { fullname: 'Test' })
     }
 
-    useEffect(() => {
-        if (state?.latitude && state?.longitude) {
-            fetchWeather(state?.latitude, state?.longitude)
-        }
-    }, [state?.latitude, state?.longitude]);
-
-
-    console.log(weather);
-
     return (
         <div>
-            <aside className="fixed w-[285px] py-[15px]">
-                <div className="flex justify-end">
-                    <div className="h-[46px] mb-[15px] items-center w-[190px] flex justify-end">
+            <aside className="fixed w-[285px] py-[15px] hidden lg:block">
+                <div className="flex justify-end gap-x-2">
+                    <div>
+                        <ThemeMode/>
+                    </div>
+                    <div className={classNames({
+                        'h-[46px] mb-[15px] items-center flex justify-end': true,
+                        'w-[190px]': token
+                    })}>
                         {token && (
                             <Dropdown
                                 btnRender={
@@ -73,12 +61,12 @@ function RightBlock() {
                                     </div>
                                 }
                             >
-                                {dropdownMenus.map((menu, index) => (
+                                {profileMenus.map((menu, index) => (
                                     <Link
                                         key={index}
                                         to={menu.route ? route(menu.route) : false}
                                         onClick={menu.key ? () => handeClick(menu.key) : false}
-                                        className="flex items-center h-[40px] gap-x-2"
+                                        className="flex text-sm items-center h-[40px] gap-x-2"
                                     >
                                         <span className="inline-flex size-[24px] text-[18px] items-center">{menu.icon}</span>
                                         <span>{menu.name}</span>
@@ -97,24 +85,8 @@ function RightBlock() {
 
                 <Scrollbar className="h-[calc(100vh_-_85px)]">
                     <div className="space-y-[15px]">
-                        <Card
-                            title="Coimbatore, Tamil Nadu"
-                            rightRender={<FiCrosshair className="text-[18px]" />}
-                        >
-                            <div className="flex justify-between">
-                                <div>
-                                    <p className="text-[15px]">Sunny</p>
-                                    <p className="text-[26px] font-bold">31<sup>o</sup> c</p>
-                                </div>
-                                <div className="text-[52px] size-[52px] inline-flex items-center justify-center text-[#FFCF26]">
-                                    <GoSun />
-                                </div>
-                            </div>
-                            <div className="text-[12px] mt-[15px] space-x-[23px]">
-                                <span>Celsius</span>
-                                <span className="opacity-30">Fahrenheit</span>
-                            </div>
-                        </Card>
+
+                        <Weather/>
 
                         <Card
                             title="Become a Story Writer"

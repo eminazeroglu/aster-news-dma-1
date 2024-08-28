@@ -3,7 +3,7 @@
 }
 
 .pagination-item {
-    @apply h-[35px] px-3 border border-gray-200 rounded cursor-pointer disabled:opacity-20 flex items-center justify-center bg-white
+    @apply h-[35px] px-3 border border-gray-200 rounded cursor-pointer disabled:opacity-20 flex items-center justify-center bg-white dark:bg-gray-800 dark:border-gray-700
 }
 
 .pagination-item.disabled {

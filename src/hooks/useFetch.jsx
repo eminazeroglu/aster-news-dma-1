@@ -1,8 +1,20 @@
-import { useState } from "react";
-import { API } from "../utils/api";
+import React, {useState} from "react";
+import {API} from "../utils/api";
 import NewsApi from "../api/news.api";
 import AuthorApi from "../api/author.api";
 import AppApi from "api/app.api.jsx";
+import axios from "axios";
+import {
+    WiCloud,
+    WiCloudy,
+    WiDayCloudy,
+    WiDayShowers,
+    WiDaySunny,
+    WiDust,
+    WiHail,
+    WiLightning,
+    WiSnow
+} from "react-icons/wi";
 
 export const useFetch = (initialState = false) => {
     const [loading, setLoading] = useState(false);
@@ -11,11 +23,10 @@ export const useFetch = (initialState = false) => {
     const fetchData = async (url, params = {}, list = true) => {
         try {
             setLoading(true)
-            const res = await API.get(url, { params });
+            const res = await API.get(url, {params});
             setData(list ? res.data : res)
             setLoading(false)
-        }
-        catch(e) {
+        } catch (e) {
             setData(initialState)
             setLoading(false)
         }
@@ -43,7 +54,7 @@ export const useFetchRandomAuthor = () => {
     const [data, fetchData, loading] = useFetch([]);
 
     const fetch = (limit) => {
-        fetchData(AuthorApi.all, { random: true, limit })
+        fetchData(AuthorApi.all, {random: true, limit})
     }
 
     return [data, fetch, loading]
@@ -110,15 +121,62 @@ export const useFetchCategoryBySlug = () => {
 }
 
 export const useFetchOpenWeatherMap = () => {
-    const [data, fetchData, loading] = useFetch();
+    const [data, setData] = useState()
 
-    const fetch = (lat, lon) => {
-        fetchData(AppApi.openWeatherMap, {
-            lat,
-            lon,
-            appid: import.meta.env.VITE_APP_OPEN_WEATHER_KEY
+    const fetch = async (lat, lon) => {
+        const res = await axios.get(AppApi.openWeatherMap, {
+            params: {
+                units: "metric",
+                lat,
+                lon,
+                appid: import.meta.env.VITE_APP_OPEN_WEATHER_KEY
+            }
         })
+        const weatherType = {
+            "clear sky": {
+                name: 'Günəşli',
+                icon: <WiDaySunny/>
+            },
+            "few clouds": {
+                name: 'Az buludlu',
+                icon: <WiDayCloudy/>
+            },
+            "scattered clouds": {
+                name: 'Parçalı Buludlu',
+                icon: <WiCloudy/>
+            },
+            "broken clouds": {
+                name: 'Buludlu',
+                icon: <WiCloud/>
+            },
+            "shower rain": {
+                name: 'Güçlü Yağışlı',
+                icon: <WiHail/>
+            },
+            "rain": {
+                name: 'Yağışlı',
+                icon: <WiDayShowers/>
+            },
+            "thunderstorm": {
+                name: 'Şimşəkli',
+                icon: <WiLightning/>
+            },
+            "snow": {
+                name: 'Qarlı',
+                icon: <WiSnow/>
+            },
+            "mist": {
+                name: 'Rütubətli',
+                icon: <WiDust/>
+            },
+        }
+        if (res)
+            setData({
+                temp: Math.round(res.data.main.temp),
+                name: res.data.name,
+                type: weatherType[res.data.weather[0].description],
+            })
     }
 
-    return [data, fetch, loading]
+    return [data, fetch]
 }

@@ -7,11 +7,11 @@ import Scrollbar from "../ui/scrollbar";
 function LeftBlock() {
     return (
         <div>
-            <aside className="fixed w-[260px]">
+            <aside className="fixed w-[260px] hidden lg:block">
                 <div className="py-[20px] px-[30px]">
                     <Link to={route('home')} className="flex items-center gap-[15px]">
                         <img src="/logo.svg" alt="" />
-                        <span className="text-primaryDark text-[18px] font-bold">Aster News</span>
+                        <span className="text-primaryDark dark:text-white text-[18px] font-bold">Aster News</span>
                     </Link>
                 </div>
 

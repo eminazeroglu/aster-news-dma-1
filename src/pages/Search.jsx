@@ -47,7 +47,7 @@ function Search() {
                 items={breadcrumbItems}
             />
 
-            <div className="grid grid-cols-2 gap-[20px] mt-5">
+            <div className="grid lg:grid-cols-2 grid-cols-1 gap-[20px] mt-5">
                 <SkeletonContent loading={loading} type="news" count={limit}>
                     {response?.data?.map((item, index) => (
                         <NewsItem key={index} item={item}/>

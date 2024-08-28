@@ -1,9 +1,9 @@
-import { route } from "../../../utils/helper";
+import { route } from "utils/helper.jsx";
 import Button from "../button";
 
 function AuthorItem({item = {}}) {
     return (
-        <article className="bg-white h-full p-[13px] rounded-[4px] text-center">
+        <article className="bg-white dark:bg-gray-800 h-full p-[13px] rounded-[4px] text-center">
             <figure className="size-[70px] overflow-hidden mb-[7px] rounded-full inline-block">
                 <img className="size-full object-cover" src={item.photo} alt={item.fullname} />
             </figure>
