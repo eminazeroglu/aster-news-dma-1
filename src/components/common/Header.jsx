@@ -65,7 +65,7 @@ function Header() {
             </div>
             <div className="flex">
                 {menus.map((menu, index) => (
-                    <Link to={route(menu.route)} key={index} className="inline-flex gap-x-2 h-[46px] px-2 items-center">
+                    <Link to={route(menu.route)} key={index} className="inline-flex text-[14px] whitespace-nowrap gap-x-2 h-[46px] px-2 items-center">
                         <span>{menu.icon}</span>
                         <span>{menu.name}</span>
                     </Link>

@@ -9,13 +9,20 @@ import CardSlider from "../ui/card-slider";
 import Scrollbar from "../ui/scrollbar";
 import FormGroup from "../ui/form/FormGroup";
 import FormInput from "../ui/form/FormInput";
-import { useModalContext } from "../../contexts/ModalContext";
-import { useStoreAuth } from "../../stores/module/auth.store";
+import { useModalContext } from "contexts/ModalContext.jsx";
+import { useStoreAuth } from "stores/module/auth.store.jsx";
+import { useGeolocation } from "@uidotdev/usehooks";
+import {useFetchOpenWeatherMap} from "hooks/useFetch.jsx";
+import {useEffect} from "react";
 
 function RightBlock() {
 
     const {handleModal } = useModalContext();
     const {token, user} = useStoreAuth();
+    const state = useGeolocation();
+    const [weather, fetchWeather] = useFetchOpenWeatherMap();
+
+    console.log(state);
 
     const texts = [
         '1. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quia soluta neque iure voluptate distinctio aliquid quae labore optio pariatur harum sapiente officiis, sit ad minima laudantium velit perspiciatis debitis.',
@@ -40,6 +47,12 @@ function RightBlock() {
     const handleLogin = () => {
         handleModal('login', true, { fullname: 'Test' })
     }
+
+    useEffect(() => {
+        if (state?.latitude && state?.longitude) {
+            fetchWeather(state?.latitude, state?.longitude)
+        }
+    }, [state?.latitude, state?.longitude]);
 
     return (
         <div>

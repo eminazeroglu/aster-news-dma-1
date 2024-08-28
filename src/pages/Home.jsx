@@ -3,7 +3,7 @@ import AuthorItem from "../components/ui/author-item";
 import NewsItem from "../components/ui/news-item";
 import Slider from "../components/ui/slider";
 import Button from "../components/ui/button";
-import { useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 import { useFetchNewsAll, useFetchRandomAuthor } from "../hooks/useFetch";
 import SkeletonContent from "../components/ui/skeleton-content";
 import Section from "../components/ui/section";
@@ -18,12 +18,12 @@ function Home() {
     const [{data: allNewsItems = []}, fetchAllNewsItems, allNewsLoading] = useFetchNewsAll();
     const [authors, fetchAuthors, authorLoading] = useFetchRandomAuthor();
 
-    const fetchAllNews = () => {
+    const fetchAllNews = useCallback(() => {
         fetchAllNewsItems({
             limit: allNewsLimit,
             page
         });
-    }
+    }, [page])
 
     const handlePage = () => {
         setPage(p => p+1)

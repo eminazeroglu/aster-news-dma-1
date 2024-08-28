@@ -2,6 +2,7 @@ import { useState } from "react";
 import { API } from "../utils/api";
 import NewsApi from "../api/news.api";
 import AuthorApi from "../api/author.api";
+import AppApi from "api/app.api.jsx";
 
 export const useFetch = (initialState = false) => {
     const [loading, setLoading] = useState(false);
@@ -103,6 +104,20 @@ export const useFetchCategoryBySlug = () => {
 
     const fetch = (slug) => {
         fetchData(NewsApi.categoryBySlug.replace(':slug', slug), {}, false)
+    }
+
+    return [data, fetch, loading]
+}
+
+export const useFetchOpenWeatherMap = () => {
+    const [data, fetchData, loading] = useFetch();
+
+    const fetch = (lat, lon) => {
+        fetchData(AppApi.openWeatherMap, {
+            lat,
+            lon,
+            appid: import.meta.env.VITE_APP_OPEN_WEATHER_KEY
+        })
     }
 
     return [data, fetch, loading]
