@@ -54,6 +54,9 @@ function RightBlock() {
         }
     }, [state?.latitude, state?.longitude]);
 
+
+    console.log(weather);
+
     return (
         <div>
             <aside className="fixed w-[285px] py-[15px]">
