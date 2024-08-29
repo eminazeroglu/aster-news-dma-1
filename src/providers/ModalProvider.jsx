@@ -5,7 +5,7 @@ function ModalProvider({children}) {
     const [modals, setModals] = useState({});
 
     const getModals = async () => {
-        const modals = await dynamicImport();
+        const modals = await dynamicImport('modals', 'jsx');
         setModals(modals)
     }
 

@@ -14,11 +14,15 @@ import Weather from "components/ui/weather/index.jsx";
 import ThemeMode from "components/ui/theme-mode/index.jsx";
 import classNames from "classnames";
 import {profileMenus} from "router/menus.jsx";
+import button from "../ui/button";
+import {useStoreApp} from "stores/module/app.store.jsx";
+import {serviceStoreSetLanguage} from "services/store.service.jsx";
 
 function RightBlock() {
 
     const {handleModal } = useModalContext();
     const {token, user} = useStoreAuth();
+    const {language, languages} = useStoreApp();
 
     const texts = [
         '1. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quia soluta neque iure voluptate distinctio aliquid quae labore optio pariatur harum sapiente officiis, sit ad minima laudantium velit perspiciatis debitis.',
@@ -43,6 +47,25 @@ function RightBlock() {
         <div>
             <aside className="fixed w-[285px] py-[15px] hidden lg:block">
                 <div className="flex justify-end gap-x-2">
+                    <div className="mr-2 pr-2 border-r dark:border-r-gray-700 h-[40px]">
+                        <Dropdown
+                            position="right"
+                            className="!min-w-[auto] !py-0"
+                            btnRender={
+                                <button className="">
+                                    {language.toUpperCase()}
+                                </button>
+                            }
+                        >
+                            <div className="flex flex-col divide-y dark:divide-gray-700">
+                                {languages.filter(i => i !== language).map((lang, index) => (
+                                    <button onClick={() => serviceStoreSetLanguage(lang)}  key={index} className="h-[38px] px-2">
+                                        {lang.toUpperCase()}
+                                    </button>
+                                ))}
+                            </div>
+                        </Dropdown>
+                    </div>
                     <div>
                         <ThemeMode/>
                     </div>

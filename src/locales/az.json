@@ -1,0 +1,10 @@
+{
+    "menu": {
+        "home": "Ana səhifə",
+        "about": "Haqqımızda",
+        "contact": "Əlaqə"
+    },
+    "header": {
+        "searchPlaceholder": "Xəbər axtar"
+    }
+}

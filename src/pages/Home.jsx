@@ -23,7 +23,7 @@ function Home() {
             limit: allNewsLimit,
             page
         });
-    }, [page])
+    }, [])
 
     const handlePage = () => {
         setPage(p => p+1)

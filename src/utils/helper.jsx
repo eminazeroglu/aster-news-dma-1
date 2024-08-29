@@ -1,6 +1,9 @@
-import { generatePath } from "react-router-dom";
+import {generatePath} from "react-router-dom";
 import routers from "../router/router"
-import { toast } from 'react-toastify';
+import {toast} from 'react-toastify';
+import langAz from 'locales/az.json'
+import langEn from 'locales/en.json'
+import stores from "stores";
 
 export const objectToQueryParams = (object) => {
     let query = '?';
@@ -35,8 +38,7 @@ export const dynamicImport = async () => {
             const fileName = path.split('/').pop().replace('.jsx', '')
             const module = await moduleFiles[path]();
             modules[fileName] = module.default || module;
-        }
-        catch (e) {
+        } catch (e) {
             console.error(`Error importing ${moduleName}:`, error);
         }
     }
@@ -46,4 +48,27 @@ export const dynamicImport = async () => {
 
 export const notification = (message, type = 'success') => {
     toast[type](message)
+}
+
+export const translate = (name) => {
+
+    const {language} = stores.getState().appStore;
+
+    const keys = name.split('.');
+    const translates = {
+        az: langAz,
+        en: langEn,
+    }
+    let result = translates[language];
+
+    for (let key of keys) {
+        if (result[key]) {
+            result = result[key];
+        }
+        else {
+            result = name;
+        }
+    }
+
+    return result;
 }

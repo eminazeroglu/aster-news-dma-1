@@ -1,5 +1,5 @@
 import stores from "../stores"
-import { setDarkMode, setErrors } from "../stores/module/app.store"
+import {setDarkMode, setErrors, setLanguage} from "../stores/module/app.store"
 import { setToken, setUser } from "../stores/module/auth.store"
 
 export const serviceStoreSetToken = (value) => {
@@ -12,6 +12,11 @@ export const serviceStoreSetUser = (value) => {
 
 export const serviceStoreSetDarkMode = (value) => {
     stores.dispatch(setDarkMode(value))
+}
+
+export const serviceStoreSetLanguage = (value) => {
+    stores.dispatch(setLanguage(value))
+    window.location.reload();
 }
 
 export const serviceStoreSetErrors = (value) => {

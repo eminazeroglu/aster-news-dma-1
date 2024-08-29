@@ -1,3 +1,10 @@
 {
-    "name": "Test"
+    "menu": {
+        "home": "Home",
+        "about": "About",
+        "contact": "Contact"
+    },
+    "header": {
+        "searchPlaceholder": "Search for news.."
+    }
 }

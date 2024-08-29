@@ -7,11 +7,15 @@ import {useStoreApp} from "stores/module/app.store.jsx";
 import {serviceStoreSetDarkMode} from "services/store.service.jsx";
 import useDeviceType from "hooks/useDevice.jsx";
 import MobileHeader from "components/common/MobileHeader.jsx";
+import {translate} from "utils/helper.jsx";
 
 function AppLayout({ children }) {
 
     const {darkMode} = useStoreApp();
     const {isMobile} = useDeviceType();
+
+
+    translate('menu.home');
 
     useEffect(() => {
         if (darkMode) {

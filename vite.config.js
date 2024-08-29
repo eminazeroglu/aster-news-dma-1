@@ -10,6 +10,7 @@ export default defineConfig({
             'src': path.resolve(__dirname, './src'),
             'api': path.resolve(__dirname, './src/api'),
             'assets': path.resolve(__dirname, './src/assets'),
+            'locales': path.resolve(__dirname, './src/locales'),
             'components': path.resolve(__dirname, './src/components'),
             'contexts': path.resolve(__dirname, './src/contexts'),
             'hooks': path.resolve(__dirname, './src/hooks'),
