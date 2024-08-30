@@ -13,7 +13,7 @@ function Modal({title, children, backdrop = false, className, open = false, onCl
 
     const modalContent = (
         <div className={classNames({
-            'fixed flex items-center overflow-y-auto py-10 transition-all justify-center inset-0 z-[999] bg-gray-900/60 dark:bg-gray-800/90': true,
+            'fixed flex items-center px-4 md:px-0 overflow-y-auto py-10 transition-all justify-center inset-0 z-[999] bg-gray-900/60 dark:bg-gray-800/90': true,
             'opacity-0 invisible': !open
         })}>
             <div ref={ref} className={classNames([

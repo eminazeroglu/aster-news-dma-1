@@ -51,7 +51,7 @@ function Contact() {
             <Card>
                 <form onSubmit={handleSubmit}>
                     <div className="space-y-5">
-                        <div className="grid grid-cols-2 gap-5">
+                        <div className="grid lg:grid-cols-2 gap-5">
                             <FormGroup
                                 label="Adınız"
                                 errorMessage={errors.name && touched.name ? errors.name : false}
@@ -76,7 +76,7 @@ function Contact() {
                                 />
                             </FormGroup>
                         </div>
-                        <div className="grid grid-cols-2 gap-5">
+                        <div className="grid lg:grid-cols-2 gap-5">
                             <FormGroup
                                 label="Email"
                                 errorMessage={errors.email && touched.email ? errors.email : false}

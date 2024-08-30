@@ -69,9 +69,9 @@ function View() {
                                 ]}
                             />
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex md:flex-row flex-col gap-y-4 justify-between">
                             <div>
-                                <h1 className="text-[25px] leading-[34px] font-bold mb-[12px]">{data?.title}</h1>
+                                <h1 className="text-[18px] md:text-[25px] leading-[24px] md:leading-[34px] font-bold mb-[12px]">{data?.title}</h1>
                                 <div>
                                     <Link to={route('search', {category: data.category.slug})} className="bg-[#CDE7F8] text-[#2F9FF8] h-[22px] px-[10px] rounded-[4px] inline-flex text-[12px] items-center">
                                         {data.category.name}

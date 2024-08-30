@@ -27,7 +27,7 @@ function MobileHeader(props) {
             document.querySelector('body').classList.add('overflow-hidden');
         }
         else {
-            document.querySeletor('body').classList.remove('overflow-hidden');
+            document.querySelector('body').classList.remove('overflow-hidden');
         }
     }, [mobileOpen]);
 

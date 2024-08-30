@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
-import {route} from "utils/helper.jsx";
+import {route, translate} from "utils/helper.jsx";
 import {FiX} from "react-icons/fi";
 import menus from "router/menus.jsx";
 import {useFetchCategories} from "hooks/useFetch.jsx";
@@ -43,7 +43,7 @@ function MobileNavbar({open, onClose}) {
                             <Link to={route(menu.route)} key={index}
                                   className="inline-flex text-[18px] gap-x-[22px] dark:text-gray-300 whitespace-nowrap h-[46px] px-2 items-center">
                                 <span className="text-[24px] w-[24px] inline-flex h-[24px] justify-center items-center">{menu.icon}</span>
-                                <span>{menu.name}</span>
+                                <span>{translate(menu.name)}</span>
                             </Link>
                         ))}
                     </div>
