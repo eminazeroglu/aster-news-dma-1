@@ -1,10 +1,9 @@
 import classNames from "classnames";
 
-function FormInput({ value, password = false, onChange = () => {}, className, ...props }) {
+function FormInput({ value, rows= 4, password = false, onChange = () => {}, className, ...props }) {
     return (
-        <input
-            type={password ? 'password' : 'text'}
-            value={value}
+        <textarea
+            rows={rows}
             onChange={e => onChange(e.target.value)}
             className={classNames([
                 className || '',
@@ -13,7 +12,7 @@ function FormInput({ value, password = false, onChange = () => {}, className, ..
                 }
             ])}
             {...props}
-        />
+        ></textarea>
     );
 }
 

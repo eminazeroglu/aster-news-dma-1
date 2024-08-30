@@ -7,6 +7,8 @@ import {useCallback, useEffect, useState} from "react";
 import { useFetchNewsAll, useFetchRandomAuthor } from "../hooks/useFetch";
 import SkeletonContent from "../components/ui/skeleton-content";
 import Section from "../components/ui/section";
+import {Helmet} from "react-helmet";
+import Seo from "components/ui/seo/index.jsx";
 
 function Home() {
 
@@ -45,6 +47,9 @@ function Home() {
 
     return (
         <>
+            <Seo
+                title={'Aster News / Son Xəbərlər'}
+            />
             <Section title="Ən çox oxunanlar">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
                     <SkeletonContent loading={newsLoading} type="news" count={newsLimit}>

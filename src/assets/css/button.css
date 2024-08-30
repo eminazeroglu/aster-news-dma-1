@@ -43,7 +43,7 @@
 }
 
 .btn-outline-transparent {
-    @apply border border-gray-300 text-amberBlack
+    @apply border border-gray-300 text-amberBlack dark:border-gray-600 dark:text-white
 }
 
 .btn-primary-outline {

@@ -2,6 +2,10 @@
     @apply min-h-[38px] dark:bg-gray-800 dark:border-gray-700 placeholder:text-[#ADBCC4] border border-gray-200 bg-[#F4F9F8] outline-none px-[14px] w-full rounded-[4px]
 }
 
+textarea.form-element {
+    @apply py-[14px]
+}
+
 .form-label {
     @apply flex font-medium mb-2
 }

@@ -45,7 +45,7 @@ function Author() {
             {author && (
                 <div>
 
-                    <div className="p-3 flex items-center justify-between bg-white shadow-theme rounded-lg">
+                    <div className="p-3 flex items-center justify-between bg-white dark:bg-gray-800 shadow-theme rounded-lg">
                         <div className="flex items-center gap-x-3">
                             <figure className="size-[60px] overflow-hidden rounded-full">
                                 <img className="size-full object-cover" src={author.photo} alt="" />

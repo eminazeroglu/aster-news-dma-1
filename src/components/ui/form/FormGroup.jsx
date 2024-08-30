@@ -1,14 +1,14 @@
 import classNames from "classnames";
-import { useStoreApp } from "../../../stores/module/app.store";
+import { useStoreApp } from "stores/module/app.store.jsx";
 
-function FormGroup({ label, required = false, children, error = false }) {
+function FormGroup({ label, required = false, children, errorMessage = false, error = false }) {
     
     const {errors} = useStoreApp();
     
     return (
         <div className={classNames({
             'form-group': true,
-            'form-group-error': errors[error]
+            'form-group-error': errors[error] || errorMessage
         })}>
             {label && (
                 <label className="form-label">
@@ -16,7 +16,7 @@ function FormGroup({ label, required = false, children, error = false }) {
                 </label>
             )}
             {children}
-            {errors[error] && <p className="form-error">{errors[error]}</p>}
+            {(errors[error] || errorMessage) && <p className="form-error">{errors[error] || errorMessage}</p>}
         </div>
     );
 }

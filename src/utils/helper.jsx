@@ -54,21 +54,24 @@ export const translate = (name) => {
 
     const {language} = stores.getState().appStore;
 
-    const keys = name.split('.');
-    const translates = {
-        az: langAz,
-        en: langEn,
-    }
-    let result = translates[language];
+    const keys = name?.split('.');
 
-    for (let key of keys) {
-        if (result[key]) {
-            result = result[key];
-        }
-        else {
-            result = name;
-        }
-    }
+    if (keys?.length > 0) {
 
-    return result;
+        const translates = {
+            az: langAz,
+            en: langEn,
+        }
+        let result = translates[language];
+
+        for (let key of keys) {
+            if (result[key]) {
+                result = result[key];
+            } else {
+                result = name;
+            }
+        }
+
+        return result;
+    }
 }

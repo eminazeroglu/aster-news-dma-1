@@ -9,6 +9,8 @@ import {FiChevronDown} from "react-icons/fi";
 import CommentBox from "components/ui/comment-box/index.jsx";
 import {API} from "utils/api.jsx";
 import NewsApi from "api/news.api.jsx";
+import Breadcrumb from "components/ui/breadcrumb/index.jsx";
+import Seo from "components/ui/seo/index.jsx";
 
 function View() {
 
@@ -50,34 +52,49 @@ function View() {
     return (
         <Loading loading={loading}>
             {data && (
-                <div className="pt-[20px]">
-                    <h1 className="text-[25px] leading-[34px] font-bold mb-[12px]">{data?.title}</h1>
-                    <div>
-                        <Link to={route('search', {category: data.category.slug})} className="bg-[#CDE7F8] text-[#2F9FF8] h-[22px] px-[10px] rounded-[4px] inline-flex text-[12px] items-center">
-                            {data.category.name}
-                        </Link>
-                    </div>
-
-                    <div className="mt-[35px]">
-                        <figure className="aspect-video rounded-lg overflow-hidden">
-                            <img src={data.photo} className="size-full object-cover" alt=""/>
-                        </figure>
-                    </div>
-
-                    <div className="my-[35px]" dangerouslySetInnerHTML={{__html: data.content}} />
-
-                    <div className="text-center">
-                        <p className="text-[#ADBCC4] text-[12px]">{moment(data.published_date).format('DD-MM-YYYY HH:mm')}</p>
-                        <p className="text-[12px] mt-2">{data.author.fullname}</p>
-                    </div>
-
-                    <CommentBox
-                        items={comments}
-                        onSubmit={(data) => handleSubmit(data)}
-                        btnLoading={btnLoading}
-                        onDelete={id => handleDelete(id)}
+                <>
+                    <Seo
+                        title={data.title}
+                        description={data.description}
+                        image={data.photo}
                     />
-                </div>
+                    <div className="pt-[20px]">
+                        <div className="mb-3">
+                            <Breadcrumb
+                                items={[
+                                    {name: 'Xəbərlər'},
+                                    {name: data.title}
+                                ]}
+                            />
+                        </div>
+                        <h1 className="text-[25px] leading-[34px] font-bold mb-[12px]">{data?.title}</h1>
+                        <div>
+                            <Link to={route('search', {category: data.category.slug})} className="bg-[#CDE7F8] text-[#2F9FF8] h-[22px] px-[10px] rounded-[4px] inline-flex text-[12px] items-center">
+                                {data.category.name}
+                            </Link>
+                        </div>
+
+                        <div className="mt-[35px]">
+                            <figure className="aspect-video rounded-lg overflow-hidden">
+                                <img src={data.photo} className="size-full object-cover" alt=""/>
+                            </figure>
+                        </div>
+
+                        <div className="my-[35px]" dangerouslySetInnerHTML={{__html: data.content}} />
+
+                        <div className="text-center">
+                            <p className="text-[#ADBCC4] text-[12px]">{moment(data.published_date).format('DD-MM-YYYY HH:mm')}</p>
+                            <p className="text-[12px] mt-2">{data.author.fullname}</p>
+                        </div>
+
+                        <CommentBox
+                            items={comments}
+                            onSubmit={(data) => handleSubmit(data)}
+                            btnLoading={btnLoading}
+                            onDelete={id => handleDelete(id)}
+                        />
+                    </div>
+                </>
             )}
         </Loading>
     );
