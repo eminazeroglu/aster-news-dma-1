@@ -22,7 +22,7 @@ function Modal({title, children, backdrop = false, className, open = false, onCl
                     'bg-white dark:bg-gray-700 rounded-lg': true
                 }
             ])}>
-                <div className="p-4 border-b dark:border-gray-600 flex items-center justify-between">
+                <div className="p-4 border-b dark:border-gray-600 flex gap-x-2 items-center justify-between">
                     <div>
                         {title && (
                             <h4 className="font-semibold">{title}</h4>

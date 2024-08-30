@@ -5,12 +5,13 @@ import Loading from "components/ui/loading/index.jsx";
 import {notification, route} from "utils/helper.jsx";
 import moment from "moment";
 import Button from "components/ui/button/index.jsx";
-import {FiChevronDown} from "react-icons/fi";
+import {FiChevronDown, FiShare} from "react-icons/fi";
 import CommentBox from "components/ui/comment-box/index.jsx";
 import {API} from "utils/api.jsx";
 import NewsApi from "api/news.api.jsx";
 import Breadcrumb from "components/ui/breadcrumb/index.jsx";
 import Seo from "components/ui/seo/index.jsx";
+import {useModalContext} from "contexts/ModalContext.jsx";
 
 function View() {
 
@@ -18,6 +19,7 @@ function View() {
     const [data, fetchData, loading] = useFetchNewsBySlug()
     const [comments, fetchComments, commentLoading] = useFetchNewsCommentById()
     const [btnLoading, setBtnLoading] = useState(false);
+    const {handleModal} = useModalContext();
 
     const handleSubmit = async (body) => {
         setBtnLoading(true)
@@ -67,11 +69,22 @@ function View() {
                                 ]}
                             />
                         </div>
-                        <h1 className="text-[25px] leading-[34px] font-bold mb-[12px]">{data?.title}</h1>
-                        <div>
-                            <Link to={route('search', {category: data.category.slug})} className="bg-[#CDE7F8] text-[#2F9FF8] h-[22px] px-[10px] rounded-[4px] inline-flex text-[12px] items-center">
-                                {data.category.name}
-                            </Link>
+                        <div className="flex justify-between">
+                            <div>
+                                <h1 className="text-[25px] leading-[34px] font-bold mb-[12px]">{data?.title}</h1>
+                                <div>
+                                    <Link to={route('search', {category: data.category.slug})} className="bg-[#CDE7F8] text-[#2F9FF8] h-[22px] px-[10px] rounded-[4px] inline-flex text-[12px] items-center">
+                                        {data.category.name}
+                                    </Link>
+                                </div>
+                            </div>
+
+                            <div>
+                                <button onClick={() => handleModal('share', true, {title: data.title, url: data.seo_link})} className="h-10 px-3 space-x-2 border dark:border-gray-700 dark:text-gray-200 items-center justify-center flex rounded">
+                                    <FiShare/>
+                                    <span>Paylaş</span>
+                                </button>
+                            </div>
                         </div>
 
                         <div className="mt-[35px]">
